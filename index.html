@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多视频播放器 By QZL & DeepSeek & Trae AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <h1>多视频播放器<br>By QZL & DeepSeek & Trae AI</h1>
+        <div class="video-content" id="videoContent">
+            <div class="video-container" draggable="true">
+                <button class="source-btn" title="设置视频源" onclick="showSourceDialog(this)">✎</button>
+                <button class="add-button top" onclick="addVideo(this, 'top')">+</button>
+                <button class="add-button bottom" onclick="addVideo(this, 'bottom')">+</button>
+                <button class="add-button left" onclick="addVideo(this, 'left')">+</button>
+                <button class="add-button right" onclick="addVideo(this, 'right')">+</button>
+                <button class="delete-btn" title="删除视频" onclick="removeVideo(this)">×</button>
+                <button class="check-box" onclick="toggleVideoSelection(this)">✓</button>
+                <video controls><source src="example.mp4" type="video/mp4">
+                    <div class="quality-selector"></div></video>
+            </div>
+        </div>
+        <div class="control-area">
+            <div class="controls">
+                <button onclick="controlAllVideos('play')">全部播放</button>
+                <button onclick="controlAllVideos('pause')">全部暂停</button>
+                <button onclick="controlAllVideos('stop')">全部停止</button>
+                <button onclick="controlAllVideos('mute')">全部静音</button>
+                <button onclick="controlAllVideos('unmute')">取消静音</button>
+                <button id="toggleControlsBtn" onclick="toggleContainerButtons()">隐藏按钮</button>
+                <button id="dragModeBtn" class="drag-mode-btn" onclick="toggleDragMode()">禁用拖拽</button>
+                <button id="swapModeBtn" class="swap-mode-btn" onclick="toggleSwapMode()">启用交换</button>
+                <button onclick="swapSelectedVideos()" id="swapBtn" disabled>交换选中视频</button>
+            </div>
+            <div class="volume-container">
+                <label for="volume">全局音量:</label>
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="1" oninput="setAllVolume(this.value)">
+            </div>
+        </div>
+    </div>
+    <div class="source-dialog" id="sourceDialog">
+        <h3>设置视频源</h3>
+        <div class="source-form">
+            <div class="source-input-group">
+                <input type="text" id="sourceInput" placeholder="输入视频文件路径或URL">
+            </div>
+            <div class="source-btn-group">
+                <button class="source-browse" onclick="browseVideoFile()">浏览</button>
+                <button class="source-cancel" onclick="hideSourceDialog()">取消</button>
+                <button class="source-confirm" onclick="confirmSource()">确定</button>
+            </div>
+        </div>
+    </div>
+    <input type="file" id="fileInput" accept="video/*" style="display: none;">
+</body>
+</html>
